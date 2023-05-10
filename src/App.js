@@ -1,8 +1,11 @@
 import React from 'react'
+import { Login } from './features/Login'
 
 function App() {
   return (
-    <div>App</div>
+    <React.Fragment>
+      <Login />
+    </React.Fragment>
   )
 }
 
