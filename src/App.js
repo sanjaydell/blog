@@ -1,20 +1,21 @@
-import React, { useState } from 'react'
-import Button from '@mui/material/Button';
+import React, { useState } from "react";
 
-import { Login } from './features/Login'
-import { Home } from './features/Home'
-import { Header } from './components/Header';
+import { Login } from "./features/Login";
+import { Home } from "./features/Home";
 
 function App() {
-  const [user, setUser] = useState(null);
-  console.log('111111111111111111111', user);
+  const isUserLoggedIn = JSON.parse(window.localStorage.getItem("user"));
+  const [user, setUser] = useState(isUserLoggedIn);
+
   return (
     <React.Fragment>
-      <Header />
-      {user ? <Home /> : <Login setUser={setUser} />}
-      <Button onClick={() => setUser(null)}>Log Out</Button>
+      {user ? (
+        <Home setUser={setUser} />
+      ) : (
+        <Login setUser={setUser} />
+      )}
     </React.Fragment>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { collection, getDocs } from "firebase/firestore";
+import Box from '@mui/material/Box';
+
 import { db } from '../firebase';
+import { BlogCard } from '../components/BlogCard';
+import { Header } from '../components/Header';
 
 
-export const Home = () => {
+export const Home = (props) => {
+  const { setUser } = props;
   const [posts, setPosts] = useState([]);
   const postCollectionRef = collection(db, "posts");
   useEffect(() => {
@@ -15,11 +20,15 @@ export const Home = () => {
     getPosts();
   }, []);
 
+
   return (
     <>
-    {posts.map((post) => 
-      <div><h1>{post.title}</h1><h6>{post.content}</h6></div>
-    )}
+      <Header setUser={setUser} />
+      <Box width="70%" justifyContent="center" margin="auto" paddingTop="2rem" height="90vh" marginTop="10vh">
+        {posts.map((post) => 
+          <BlogCard post={post} />
+        )}
+      </Box>
     </>
   )
 }
