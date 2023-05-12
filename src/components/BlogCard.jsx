@@ -4,6 +4,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { SocialShare } from './SocialShare';
 
 
 export const BlogCard = (props) => {
@@ -21,7 +22,7 @@ export const BlogCard = (props) => {
           <Typography variant='h6' >{content}</Typography>
         </CardContent>
         <CardActions>
-          Actions
+          <SocialShare title={title} content={content} />
         </CardActions>
       </Card>
   )

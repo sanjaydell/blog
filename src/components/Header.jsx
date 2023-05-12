@@ -12,7 +12,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { db } from "../firebase";
 
 export const Header = (props) => {
-  const { setUser } = props;
+  const { setUser, setUpdatedPosts } = props;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [openModal, setOpenModal] = useState(false);
@@ -39,14 +39,14 @@ export const Header = (props) => {
             width="100%"
             justifyContent="space-between"
           >
-            <Box display="flex" flexDirection="row">
+            <Box display="flex" flexDirection="row" alignItems="center">
               <img src="/dailyblog.png" alt="logo" width="24px" height="24px" />
               <h1>Blog Post</h1>
               <Button
-                sx={{ color: "white" }}
+                sx={{ color: "white", paddingLeft: '5rem' }}
                 onClick={() => setOpenModal(true)}
               >
-                Create New
+                <h4>Create New</h4>
               </Button>
             </Box>
             <Box display="flex" flexDirection="row">
@@ -57,7 +57,7 @@ export const Header = (props) => {
                   setUser(null);
                 }}
               >
-                Logout
+                <h4>Logout</h4>
               </Button>
             </Box>
           </Box>
@@ -97,6 +97,7 @@ export const Header = (props) => {
             onClick={() => {
               createPost();
               setOpenModal(false);
+              setUpdatedPosts(true);
             }}
             variant="contained"
             color="success"

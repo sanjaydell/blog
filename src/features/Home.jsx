@@ -11,19 +11,20 @@ export const Home = (props) => {
   const { setUser } = props;
   const [posts, setPosts] = useState([]);
   const postCollectionRef = collection(db, "posts");
+  const [updatedPosts, setUpdatedPosts] = useState(false);
   useEffect(() => {
     const getPosts = async () => {
       const data = await getDocs(postCollectionRef);
       setPosts(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
-      console.log('1111111111111111122222222222', data.docs.map((doc) => ({...doc.data(), id: doc.id})));
     }
     getPosts();
-  }, []);
+    setUpdatedPosts(false);
+  }, [updatedPosts]);
 
 
   return (
     <>
-      <Header setUser={setUser} />
+      <Header setUser={setUser} setUpdatedPosts={setUpdatedPosts} />
       <Box width="70%" justifyContent="center" margin="auto" paddingTop="2rem" height="90vh" marginTop="10vh">
         {posts.map((post) => 
           <BlogCard post={post} />

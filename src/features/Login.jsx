@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { signInWithPhoneNumber, RecaptchaVerifier } from "firebase/auth";
-
-import { auth } from "../firebase";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Alert from "@mui/material/Alert";
+
+import { auth } from "../firebase";
 
 export const Login = ({ setUser }) => {
   const [showOtpField, setShowOtpField] = useState(false);
@@ -23,13 +23,11 @@ export const Login = ({ setUser }) => {
           size: "invisible",
           callback: (response) => {
             onSendOtp();
-            console.log(response);
           },
         },
         auth
       );
     }
-    console.log("captcha", window.recaptchaVerifier);
   }
 
   function onSendOtp() {
@@ -42,7 +40,6 @@ export const Login = ({ setUser }) => {
       })
       .catch((error) => {
         setShowAlert("Please Enter Valid Phone NUmber");
-        console.log(error);
       });
   }
 
@@ -55,11 +52,9 @@ export const Login = ({ setUser }) => {
         const user = window.user;
         window.localStorage.setItem("user", JSON.stringify(user));
         setUser(window.user);
-        console.log(window.user);
       })
       .catch((error) => {
         setShowAlert("Otp is Incorrect");
-        console.log(error);
       });
   }
 
